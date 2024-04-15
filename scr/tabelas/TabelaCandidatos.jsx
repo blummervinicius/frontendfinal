@@ -1,4 +1,10 @@
-import { Table, Container, Button, InputGroup, FormControl } from "react-bootstrap";
+import {
+  Table,
+  Container,
+  Button,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 import { RiSearchLine } from "react-icons/ri";
 import { urlBackend } from "../assets/funcoes";
 import React from "react";
@@ -67,7 +73,6 @@ export default function TabelaCandidatos(props) {
     // const termoBusca = "";
     console.log(teste);
 
-
     /*
     fetch(urlBackend + "/candidato", { method: "GET" })
           .then((resposta) => resposta.json())
@@ -111,7 +116,7 @@ export default function TabelaCandidatos(props) {
           type="text"
           id="termoBusca"
           placeholder="Pesquisar candidatos"
-          onChange={filtrarVagasPorTipo}
+          onChange={buscarEntrevistas}
         />
         <InputGroup.Text>
           <RiSearchLine />

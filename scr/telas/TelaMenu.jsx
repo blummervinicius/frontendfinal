@@ -78,7 +78,7 @@ export default function TelaMenu(props) {
                 <th scope="col">Tipo de Contratação</th>
                 <th scope="col">Empresa</th>
                 <th scope="col">Localização</th>
-                <th scope="col">Salário</th>
+                <th scope="col">Salário R$</th>
                 <th scope="col">Data Publicação</th>
               </tr>
             </thead>

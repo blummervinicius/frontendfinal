@@ -11,15 +11,15 @@ export default function TelaCadCandidato(props) {
   const [exibirTabela, setExibirTabela] = useState(true);
   const [candidatos, setCandidatos] = useState([]);
   const [modoEdicao, setModoEdicao] = useState(false);
-  
+
   const [candidatoEdicao, setCandidatoEdicao] = useState({
-    cpf:0,
+    cpf: 0,
     nome: "",
     dataNascimento: "",
     email: "",
     telefone: "",
     cidade: "",
-    estado : "",
+    estado: "",
   });
 
   function prepararTela(candidato) {
@@ -28,17 +28,16 @@ export default function TelaCadCandidato(props) {
     setExibirTabela(false);
   }
   useEffect(() => {
-
-
     const getCandidatos = async () => {
       try {
-             
         const retorno = await fetch(urlBackend + "/candidato", {
           method: "GET",
         });
         if (retorno.ok) {
           const listaCandidatos = await retorno.json();
-          const nomesVagas = listaCandidatos.listaCandidatos.map((vagas) => vagas.nome);
+          const nomesVagas = listaCandidatos.listaCandidatos.map(
+            (vagas) => vagas.nome
+          );
           props.setCandidatos(nomesVagas);
         } else {
           console.error("Erro ao buscar vagas:", retorno.statusText);
@@ -50,7 +49,6 @@ export default function TelaCadCandidato(props) {
 
     getCandidatos();
   }, []);
-
 
   return (
     <Pagina>
@@ -77,14 +75,13 @@ export default function TelaCadCandidato(props) {
           />
         ) : (
           <FormCandidato
-          
             listaCandidatos={candidatos}
-             setCanditado={setCandidatos}
-             exibirTabela={setExibirTabela}
-             modoEdicao={modoEdicao}
-             setModoEdicao={setModoEdicao}
-             editar={prepararTela}
-             candidato={candidatoEdicao}
+            setCanditado={setCandidatos}
+            exibirTabela={setExibirTabela}
+            modoEdicao={modoEdicao}
+            setModoEdicao={setModoEdicao}
+            editar={prepararTela}
+            candidato={candidatoEdicao}
           />
         )}
       </Container>

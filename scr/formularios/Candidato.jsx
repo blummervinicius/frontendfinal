@@ -11,14 +11,14 @@ import { urlBackend } from "../assets/funcoes";
 import "./config.css";
 import InputMask from "react-input-mask";
 
-export default function FormFuncionario(props) {
+export default function FormCandidato(props) {
   const [editvaga, setEditvaga] = useState([]);
   const [listaVagas, setListaVaga] = useState([]);
   const [canditado, setCanditado] = useState({
     canditado: null,
-    cpf: 0,
+    cpf: "",
     nome: "",
-    dataNascimento: "",
+    idade: "",
     email: "",
     telefone: "",
     cidade: "",
@@ -70,7 +70,7 @@ export default function FormFuncionario(props) {
   };
 
   const handleDataNascimentoChange = (e) => {
-    setCanditado({ ...canditado, dataNascimento: e.target.value });
+    setCanditado({ ...canditado, idade: e.target.value });
   };
 
   const handleEmailChange = (e) => {
@@ -99,14 +99,12 @@ export default function FormFuncionario(props) {
 */
 
   const handleAddItem = () => {
-    const novaVaga = { vaga: "" }; // Item a ser adicionado
+    const novaVaga = { vaga: "" };
 
-    // Verifica se a nova vaga já existe na lista
     const vagaExiste = canditado.listaVagas.some(
       (item) => item.vaga === novaVaga.vaga
     );
 
-    // Se a vaga não existe na lista, adiciona
     if (!vagaExiste) {
       setCanditado({
         ...canditado,
@@ -129,7 +127,7 @@ export default function FormFuncionario(props) {
     const requestBody = {
       cpf: canditado.cpf,
       nome: canditado.nome,
-      idade: canditado.dataNascimento,
+      idade: canditado.idade,
       email: canditado.email,
       telefone: canditado.telefone,
       cidade: canditado.cidade,
@@ -166,7 +164,7 @@ export default function FormFuncionario(props) {
             <Form.Label className="labels">NOME</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Digite o nome do funcionário"
+              placeholder="Informe o nome do candidato"
               required
               value={canditado.nome}
               id="nome"
@@ -181,6 +179,7 @@ export default function FormFuncionario(props) {
           <Form.Group className="col-3">
             <Form.Label className="labels">CPF</Form.Label>
             <InputMask
+              placeholder="Informe o CPF"
               mask="999.999.999-99"
               maskChar="_"
               onChange={handleCpfChange}
@@ -194,21 +193,21 @@ export default function FormFuncionario(props) {
       <Row>
         <Col>
           <Form.Group className="col-3">
-            <Form.Label className="labels">DATA NASCIMENTO</Form.Label>
-            <InputMask
-              mask="99/99/9999"
-              maskChar="_"
+            <Form.Label className="labels">IDADE</Form.Label>
+            <Form.Control
+              type="int"
               onChange={handleDataNascimentoChange}
-              value={canditado.dataNascimento}
-            >
-              {(inputProps) => <Form.Control {...inputProps} type="text" />}
-            </InputMask>
+              value={canditado.idade}
+              placeholder="Informe a idade"
+            />
           </Form.Group>
         </Col>
+
         <Col>
           <Form.Group className="col-4">
             <Form.Label className="labels">E-MAIL</Form.Label>
             <FormControl
+              placeholder="Informe o e-mail"
               type="text"
               onChange={handleEmailChange}
               value={canditado.email}
@@ -221,6 +220,7 @@ export default function FormFuncionario(props) {
           <Form.Group className="col-3">
             <Form.Label className="labels">TELEFONE</Form.Label>
             <InputMask
+              placeholder="Informe o telefone"
               mask="(99) 99999-9999"
               maskChar="_"
               onChange={handleTelefoneChange}
@@ -234,6 +234,7 @@ export default function FormFuncionario(props) {
           <Form.Group className="col-4">
             <Form.Label className="labels">CIDADE</Form.Label>
             <FormControl
+              placeholder="Informe a cidade"
               type="text"
               onChange={handleCidadeChange}
               value={canditado.cidade}
@@ -287,7 +288,7 @@ export default function FormFuncionario(props) {
       <br></br>
       <Row>
         <Form.Group>
-          <Form.Label className=" labels">DISPONÍVEIS:</Form.Label>
+          <Form.Label className=" labels">VAGAS DISPONÍVEIS:</Form.Label>
           {canditado.listaVagas.map((item, index) => (
             <div key={index} className="">
               <InputGroup className="mb-3">
